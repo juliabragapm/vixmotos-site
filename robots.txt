@@ -1,0 +1,4 @@
+# Vixmotos — site publicado. Sem bloqueio de indexacao.
+# Quando o dominio definitivo estiver confirmado, adicione aqui a referencia ao sitemap.xml.
+User-agent: *
+Allow: /
