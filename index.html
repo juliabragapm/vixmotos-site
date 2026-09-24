@@ -49,7 +49,8 @@
   nav.main-nav a { transition: color 0.2s; color: #b3d9ff; position:relative; padding-bottom:4px; }
   nav.main-nav a.is-active { color: #79c300; }
   nav.main-nav a.is-active::after { content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; border-radius:2px; background:#79c300; }
-  .nav-cta { padding: 10px 28px; background: #79c300; color: #001a00; border-radius: 24px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; }
+  .nav-cta { padding: 10px 28px; background: #79c300; color: #001a00; border-radius: 24px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:active{ transform: scale(.96); }
   #nav-toggle{ display:none; width:44px; height:44px; align-items:center; justify-content:center; background:transparent; border:none; color:#fff; cursor:pointer; }
 
   #nav-mobile{ position:fixed; inset:0; z-index:60; background:#0032a0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:32px 24px; visibility:hidden; transition:opacity .25s ease; }
@@ -64,7 +65,7 @@
   .hero-curve svg{ display:block; width:100%; height:100%; }
   .hero-curve path{ fill:#fff; filter:drop-shadow(0 -6px 10px rgba(0,20,72,.16)); }
   .hero-bg { position:absolute; inset:0; z-index:0; }
-  .hero-bg img { position:absolute; top:0; right:0; height:100%; width:57%; min-width:520px; max-width:1100px; object-fit:cover; object-position:right 85%; display:block; -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 16%); mask-image:linear-gradient(to right, transparent 0%, #000 16%); }
+  .hero-bg img { position:absolute; top:0; right:0; height:100%; width:57%; min-width:520px; max-width:1100px; object-fit:cover; object-position:right top; display:block; -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 16%); mask-image:linear-gradient(to right, transparent 0%, #000 16%); }
   .hero-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(0,20,72,.95) 0%, rgba(0,40,130,.88) 30%, rgba(0,50,160,.6) 52%, rgba(0,50,160,.2) 72%, rgba(0,50,160,0) 92%); }
   .hero-inner { position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:168px 24px 100px; }
   .hero-content { max-width:600px; }
@@ -77,9 +78,12 @@
   .hero-ctas{ display:flex; flex-wrap:wrap; align-items:center; gap:20px; }
   .cta-btn { display: inline-flex; align-items:center; gap:9px; padding: 14px 32px; background: #79c300; color: #001a00; border: none; border-radius: 28px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
   .cta-btn svg{ flex-shrink:0; }
+  .cta-btn:active{ transform: scale(.96); box-shadow: none; }
   .cta-secondary-outline { display: inline-flex; align-items:center; gap:8px; padding: 6px 2px; background:none; border:none; color: #fff; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-bottom:2px solid rgba(255,255,255,.45); transition: border-color 0.2s, gap 0.2s; }
   .cta-secondary-outline svg{ transition: transform .2s; }
+  .cta-secondary-outline:active{ opacity:.7; }
   .cta-text-link { display: inline-flex; align-items:center; gap:8px; padding: 6px 2px; background:none; border:none; color: #0032a0; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-bottom:2px solid rgba(0,50,160,.3); transition: border-color 0.2s, gap 0.2s; }
+  .cta-text-link:active{ opacity:.7; }
 
   .section { padding: 80px 24px; background: #ffffff; }
   .section > div { max-width: 1280px; margin: 0 auto; }
@@ -90,51 +94,57 @@
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; position: relative; }
   .steps::before{ content:""; position:absolute; top:54px; left:calc(100%/8); right:calc(100%/8); height:2px; background:#dbe4f7; transform-origin:left; transform:scaleX(0); transition:transform 1s ease .3s; }
   .steps.is-visible::before{ transform:scaleX(1); }
-  .step{ background:#f8f8f8; border-radius:8px; padding:24px; position:relative; z-index:1; transition: transform 0.2s, box-shadow 0.2s; }
-  .step-number { width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:2px solid #0032a0; background:#fff; font-size: 18px; font-weight: 700; color: #0032a0; margin-bottom: 14px; font-family:"DM Sans",sans-serif; }
+  .step{ background:#f8f8f8; border-radius:8px; padding:24px; position:relative; z-index:1; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
+  .step:active{ transform:scale(.98); }
+  .step.is-selected{ background:#fff; box-shadow: inset 4px 0 0 #0032a0, 0 12px 24px -16px rgba(0,50,160,.3); }
+  .step-select{ display:block; width:100%; text-align:left; background:none; border:none; padding:0; margin:0; font:inherit; color:inherit; cursor:pointer; }
+  .step-number { width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:2px solid #0032a0; background:#fff; font-size: 18px; font-weight: 700; color: #0032a0; margin-bottom: 14px; font-family:"DM Sans",sans-serif; transition: background .2s, color .2s; }
+  .step.is-selected .step-number{ background:#0032a0; color:#fff; }
   .step h3 { font-size: 16px; margin-bottom: 10px; color: #1a1a1a; }
   .step p { font-size: 15px; color: #666; line-height: 1.65; }
+  .step-details-toggle{ display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:none; border:none; padding:4px 0; font-family:"DM Sans",sans-serif; font-size:13px; font-weight:700; color:#0032a0; cursor:pointer; }
+  .step-details-toggle .chevron{ transition: transform .2s; }
+  .step-details-toggle[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
+  .step-details{ display:grid; grid-template-rows:0fr; transition: grid-template-rows .2s ease; }
+  .step-details-inner{ overflow:hidden; }
+  .step-details.is-open{ grid-template-rows:1fr; }
+  .step-details p{ font-size:14px; color:#0032a0; line-height:1.6; padding-top:10px; border-top:1px solid #e0e6f5; margin-top:2px; }
   .steps-cta{ margin-top:36px; }
 
-  .icon-label{ display:inline-flex; align-items:center; gap:7px; }
-  .icon-label svg{ flex-shrink:0; }
-
   #sobre { background: #f5f5f5; }
-  .sobre-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: start; margin-top: 40px; }
+  .sobre-text { margin-top: 40px; }
   .sobre-text p { font-size: 16px; color: #061a57; margin-bottom: 24px; line-height: 1.75; max-width: 46ch; }
   .sobre-text h3 { font-size: 16px; margin-bottom: 14px; color: #0032a0; }
-  .sobre-list { list-style: none; }
-  .sobre-list li { display: flex; gap: 12px; margin-bottom: 14px; font-size: 15px; color: #1a1a1a; line-height:1.4; }
-  .sobre-list li::before { content: "✓"; color: #79c300; font-weight: 700; flex-shrink: 0; }
-  .info-card { background:#fff; border-radius:10px; padding:28px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .info-card h3{ font-size:17px; font-weight:700; color:#1a1a1a; margin-bottom:20px; }
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
-  .info-item dt { display:flex; align-items:center; gap:6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #666; margin-bottom: 4px; font-weight: 700; }
-  .info-item dd { font-size: 15px; color: #1a1a1a; font-weight: 600; line-height:1.3; }
-  .info-item.info-item--warning { grid-column: 1 / -1; border-top: 1px solid #eee; padding-top: 16px; margin-top: 4px; }
-  #depoimentos { background: #f5f5f5; }
-  .depoimentos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; max-width: 900px; }
-  .depoimento-card { background: #fff; border-radius: 10px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-  .depoimento-nome { display: block; font-size: 15px; font-weight: 700; color: #0032a0; margin-bottom: 12px; }
-  .depoimento-card p { font-size: 15px; color: #061a57; line-height: 1.7; margin: 0; }
-  .info-item.info-item--warning dt{ color:#0032a0; }
+  .benefit-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 720px; }
+  .benefit-card { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid #ebebeb; border-radius: 10px; padding: 18px; font-size: 15px; color: #1a1a1a; line-height: 1.4; box-shadow: 0 1px 3px rgba(0,0,0,.04); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+  .benefit-card svg { color: #79c300; flex-shrink: 0; margin-top: 1px; }
+  .benefit-card:active { transform: scale(.98); }
 
   #requisitos { background: #f5f5f5; }
   .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 48px; margin-top: 36px; max-width: 980px; }
-  .faq-item{ background:#fff; border-radius:8px; padding:20px 22px; }
+  .faq-item{ background:#fff; border-radius:8px; padding:4px 22px; transition: box-shadow .2s; }
   .faq-item--wide{ grid-column: 1 / -1; }
-  .faq-item h3{ font-size:15.5px; color:#0032a0; margin-bottom:8px; display:flex; gap:9px; line-height:1.3; }
-  .faq-item h3 .faq-q{ color:#79c300; flex-shrink:0; }
-  .faq-item p{ font-size:15px; color:#666; line-height:1.7; }
+  .faq-item h3{ margin:0; }
+  .faq-trigger{ display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; padding:16px 0; background:none; border:none; text-align:left; font-family:"DM Sans",sans-serif; font-size:15.5px; font-weight:700; color:#0032a0; line-height:1.3; cursor:pointer; }
+  .faq-trigger .faq-trigger-text{ display:flex; gap:9px; }
+  .faq-trigger .faq-q{ color:#79c300; flex-shrink:0; }
+  .faq-trigger .chevron{ flex-shrink:0; color:#0032a0; transition: transform .2s; }
+  .faq-trigger[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
+  .faq-panel{ display:grid; grid-template-rows:0fr; transition: grid-template-rows .2s ease; }
+  .faq-panel-inner{ overflow:hidden; }
+  .faq-item.is-open .faq-panel{ grid-template-rows:1fr; }
+  .faq-item.is-open{ box-shadow: 0 12px 24px -18px rgba(0,50,160,.35); }
+  .faq-item p{ font-size:15px; color:#666; line-height:1.7; padding-bottom:18px; }
 
   #instagram { background: #ffffff; padding-top:56px; padding-bottom:56px; }
   .instagram-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:28px; }
   .instagram-head .section-intro{ margin-bottom:0; }
-  .instagram-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 auto 16px; max-width: 900px; }
+  .instagram-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 0 auto 16px; max-width: 1120px; }
   .instagram-item { aspect-ratio: 4/5; background: #0032a0; border-radius: 8px; overflow: hidden; border: 1px solid #ebebeb; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
   .instagram-item img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; will-change: transform; }
   .caption-note{ font-size:12px; color:#666; text-align:center; }
   .cta-secondary { display:inline-flex; align-items:center; gap:8px; padding: 12px 24px; border: 2px solid #79c300; color: #0032a0; background: transparent; border-radius: 24px; font-weight: 700; font-size: 13px; text-transform:uppercase; letter-spacing:.5px; transition: all 0.2s; }
+  .cta-secondary:active{ transform: scale(.96); }
 
   #contato { background: #0032a0; }
   #contato > div { max-width: 800px; margin: 0 auto; text-align: center; }
@@ -157,7 +167,7 @@
   .footer-links { display: flex; flex-direction: column; gap: 10px; }
   footer a { color: #9fd94a; font-size: 13px; text-decoration: none; }
   footer a:hover, footer a:focus-visible { text-decoration: underline; }
-  .footer-contact-item { display: flex; align-items: center; gap: 8px; color: #b7c2e8; font-size: 13px; }
+  .footer-contact-item { display: flex; align-items: center; gap: 8px; color: #b7c2e8; font-size: 13px; padding: 12px 0; margin: -12px 0; }
   .footer-contact-item svg { flex-shrink: 0; color: #79c300; }
   a.footer-contact-item { color: #9fd94a; }
   .footer-bottom { max-width: 1280px; margin: 28px auto 0; padding: 20px 0 24px; border-top: 1px solid rgba(255,255,255,.12); text-align: center; }
@@ -181,8 +191,12 @@
     .cta-text-link:hover { border-color: #0032a0; gap: 12px; }
     .cta-secondary:hover { background: #f0f8e0; }
     .step:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(0,50,160,.3); }
+    .step.is-selected:hover { transform: translateY(-4px); }
     .instagram-item:hover img { transform: scale(1.06); }
     .float-wa:hover { background: #8fd624; transform: scale(1.05); }
+    .benefit-card:hover { transform: translateY(-3px); border-color: #79c300; box-shadow: 0 14px 28px -18px rgba(0,50,160,.35); }
+    .faq-item:hover { box-shadow: 0 8px 20px -14px rgba(0,50,160,.3); }
+    .step-details-toggle:hover { gap: 9px; }
   }
 
   /* Revelação ao rolar — JS adiciona .js-reveal-ready; sem JS o conteúdo fica sempre visível */
@@ -206,15 +220,13 @@
   @media (max-width: 1024px) {
     .hero { padding-top: 72px; }
     .hero-bg { position:relative; height: 42vw; min-height: 200px; max-height: 320px; overflow:hidden; }
-    .hero-bg img { position:absolute; top:0; right:0; height:100%; width:auto; max-width:100%; min-width:0; object-fit:contain; object-position:right center; -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 14%); mask-image:linear-gradient(to right, transparent 0%, #000 14%); }
+    .hero-bg img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 32%; }
     .hero-bg::after { background: linear-gradient(180deg, rgba(0,20,72,.04) 0%, rgba(0,20,72,.1) 70%, #0032a0 100%); }
     .hero-inner { padding: 32px 20px 56px; }
     .hero-content { max-width: none; }
     .hero-content p { max-width: none; }
     .steps { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .steps::before{ display:none; }
-    .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
-    .depoimentos-grid { grid-template-columns: 1fr; }
     .faq-grid { grid-template-columns: 1fr; gap:16px; }
     .instagram-grid { grid-template-columns: repeat(4, 1fr); gap:10px; }
   }
@@ -222,7 +234,6 @@
     .section { padding: 56px 20px; }
     #instagram { padding-top:40px; padding-bottom:40px; }
     .section h2 { font-size: 30px; }
-    .info-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
     .instagram-grid { grid-template-columns: repeat(2, 1fr); gap:12px; }
@@ -306,25 +317,51 @@
     <span class="eyebrow">Como funciona</span>
     <h2>Da consulta à possibilidade de aquisição</h2>
 
-    <div class="steps" data-reveal style="--i:0">
-      <div class="step" data-reveal style="--i:1">
-        <div class="step-number">01</div>
-        <h3>Consulta inicial</h3>
+    <div class="steps" data-reveal style="--i:0" role="group" aria-label="Etapas da contratação — selecione uma para destacar">
+      <div class="step is-selected" data-reveal style="--i:1">
+        <button type="button" class="step-select focus-ring" aria-pressed="true">
+          <div class="step-number">01</div>
+          <h3>Consulta inicial</h3>
+        </button>
         <p>Fale pelo WhatsApp e conte o que você precisa: trabalhar, fazer entregas ou ter seu próprio veículo.</p>
+        <button type="button" class="step-details-toggle focus-ring" aria-expanded="false" aria-controls="step-details-1">
+          <span class="toggle-label">Ver detalhes</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="step-details-1" class="step-details">
+          <div class="step-details-inner">
+            <p>Atendimento pessoa a pessoa, pelo WhatsApp · Região atendida: Grande Vitória, ES.</p>
+          </div>
+        </div>
       </div>
       <div class="step" data-reveal style="--i:2">
-        <div class="step-number">02</div>
-        <h3>Condições do contrato</h3>
+        <button type="button" class="step-select focus-ring" aria-pressed="false">
+          <div class="step-number">02</div>
+          <h3>Condições do contrato</h3>
+        </button>
         <p>Tire dúvidas sobre documentação, valores e as condições do aluguel diretamente com a equipe.</p>
+        <button type="button" class="step-details-toggle focus-ring" aria-expanded="false" aria-controls="step-details-2">
+          <span class="toggle-label">Ver detalhes</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="step-details-2" class="step-details">
+          <div class="step-details-inner">
+            <p>Prazo do contrato: 28 meses · CNH provisória (PPD) não é aceita para locação.</p>
+          </div>
+        </div>
       </div>
       <div class="step" data-reveal style="--i:3">
-        <div class="step-number">03</div>
-        <h3>Período de locação</h3>
+        <button type="button" class="step-select focus-ring" aria-pressed="false">
+          <div class="step-number">03</div>
+          <h3>Período de locação</h3>
+        </button>
         <p>Use a moto durante o período contratado, cumprindo as condições combinadas com a equipe.</p>
       </div>
       <div class="step" data-reveal style="--i:4">
-        <div class="step-number">04</div>
-        <h3>Possibilidade de aquisição</h3>
+        <button type="button" class="step-select focus-ring" aria-pressed="false">
+          <div class="step-number">04</div>
+          <h3>Possibilidade de aquisição</h3>
+        </button>
         <p>Ao cumprir as condições contratuais durante todo o período, você tem a opção de ficar com a moto. É uma possibilidade prevista em contrato, não uma garantia.</p>
       </div>
     </div>
@@ -342,63 +379,14 @@
   <div>
     <span class="eyebrow">Sobre a Vixmotos</span>
     <h2>A Vixmotos é um caminho mais simples para ter sua moto</h2>
-    <div class="sobre-grid">
-      <div class="sobre-text" data-reveal style="--i:0">
-        <p>A Vixmotos nasceu para quem trabalha com moto (entregas, transporte, mobilidade do dia a dia) e esbarra nas exigências do financiamento tradicional. Atendemos toda a Grande Vitória.</p>
-        <h3>Por que escolher a Vixmotos?</h3>
-        <ul class="sobre-list">
-          <li>Sem burocracia de financiamento tradicional</li>
-          <li>Atendimento direto, pessoa a pessoa, pelo WhatsApp</li>
-          <li>Foco em quem trabalha: entregas, transporte e mobilidade diária</li>
-        </ul>
-      </div>
-      <div data-reveal style="--i:1">
-        <div class="info-card">
-          <span class="eyebrow">Ficha rápida</span>
-          <h3>O que considerar antes de decidir</h3>
-          <div class="info-grid">
-            <div class="info-item">
-              <dt>Prazo do contrato</dt>
-              <dd>28 meses</dd>
-            </div>
-            <div class="info-item">
-              <dt>Região atendida</dt>
-              <dd>Grande Vitória, ES</dd>
-            </div>
-            <div class="info-item">
-              <dt>Atendimento</dt>
-              <dd>Via WhatsApp</dd>
-            </div>
-            <div class="info-item">
-              <dt>Ao final do contrato</dt>
-              <dd>Possibilidade de aquisição</dd>
-            </div>
-            <div class="info-item info-item--warning">
-              <dt class="icon-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Restrição importante</dt>
-              <dd>CNH provisória (PPD) não é aceita para locação</dd>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLACEHOLDER — seção de depoimentos aguardando conteúdo real (nome/iniciais ou "Cliente Vixmotos — bairro",
-     por LGPD) fornecido pela Julia. NÃO publicar/fazer deploy com o texto de exemplo abaixo; trocar antes. -->
-<section id="depoimentos" class="section" style="scroll-margin-top:96px">
-  <div>
-    <span class="eyebrow">Depoimentos</span>
-    <h2>O que dizem nossos clientes</h2>
-    <div class="depoimentos-grid" data-reveal style="--i:0">
-      <div class="depoimento-card">
-        <span class="depoimento-nome">[Nome do Cliente]</span>
-        <p>"[Depoimento real do cliente será inserido aqui.]"</p>
-      </div>
-      <div class="depoimento-card">
-        <span class="depoimento-nome">[Nome do Cliente]</span>
-        <p>"[Depoimento real do cliente será inserido aqui.]"</p>
-      </div>
+    <div class="sobre-text" data-reveal style="--i:0">
+      <p>A Vixmotos nasceu para quem trabalha com moto (entregas, transporte, mobilidade do dia a dia) e esbarra nas exigências do financiamento tradicional. Atendemos toda a Grande Vitória.</p>
+      <h3>Por que escolher a Vixmotos?</h3>
+      <ul class="benefit-grid">
+        <li class="benefit-card"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Sem burocracia de financiamento tradicional</li>
+        <li class="benefit-card"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Atendimento direto, pessoa a pessoa, pelo WhatsApp</li>
+        <li class="benefit-card"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Foco em quem trabalha: entregas, transporte e mobilidade diária</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -429,25 +417,35 @@
     <p class="section-intro">Tire suas dúvidas sobre os requisitos, o prazo do contrato e a região atendida.</p>
 
     <div class="faq-grid" data-reveal style="--i:0">
-      <div class="faq-item">
-        <h3><span class="faq-q">P.</span> CNH provisória (PPD) é aceita?</h3>
-        <p>Não aceitamos CNH provisória (PPD) para locação, por regra da nossa apólice de seguro.</p>
+      <div class="faq-item is-open">
+        <h3><button type="button" class="faq-trigger focus-ring" aria-expanded="true" aria-controls="faq-panel-1" id="faq-trigger-1"><span class="faq-trigger-text"><span class="faq-q">P.</span> CNH provisória (PPD) é aceita?</span><svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+        <div id="faq-panel-1" class="faq-panel" role="region" aria-labelledby="faq-trigger-1">
+          <div class="faq-panel-inner"><p>Não aceitamos CNH provisória (PPD) para locação, por regra da nossa apólice de seguro.</p></div>
+        </div>
       </div>
       <div class="faq-item">
-        <h3><span class="faq-q">P.</span> Qual é o prazo do contrato?</h3>
-        <p>O contrato tem duração de 28 meses, com possibilidade de aquisição da moto ao final.</p>
+        <h3><button type="button" class="faq-trigger focus-ring" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2"><span class="faq-trigger-text"><span class="faq-q">P.</span> Qual é o prazo do contrato?</span><svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+        <div id="faq-panel-2" class="faq-panel" role="region" aria-labelledby="faq-trigger-2">
+          <div class="faq-panel-inner"><p>O contrato tem duração de 28 meses, com possibilidade de aquisição da moto ao final.</p></div>
+        </div>
       </div>
       <div class="faq-item">
-        <h3><span class="faq-q">P.</span> Vocês atendem todo o Espírito Santo?</h3>
-        <p>No momento, nossa frota e nosso atendimento estão concentrados na Grande Vitória, no Espírito Santo.</p>
+        <h3><button type="button" class="faq-trigger focus-ring" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3"><span class="faq-trigger-text"><span class="faq-q">P.</span> Vocês atendem todo o Espírito Santo?</span><svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+        <div id="faq-panel-3" class="faq-panel" role="region" aria-labelledby="faq-trigger-3">
+          <div class="faq-panel-inner"><p>No momento, nossa frota e nosso atendimento estão concentrados na Grande Vitória, no Espírito Santo.</p></div>
+        </div>
       </div>
       <div class="faq-item">
-        <h3><span class="faq-q">P.</span> Como tiro outras dúvidas?</h3>
-        <p>Pelo WhatsApp: a equipe explica documentação, valores e as condições completas para o seu caso.</p>
+        <h3><button type="button" class="faq-trigger focus-ring" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4"><span class="faq-trigger-text"><span class="faq-q">P.</span> Como tiro outras dúvidas?</span><svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+        <div id="faq-panel-4" class="faq-panel" role="region" aria-labelledby="faq-trigger-4">
+          <div class="faq-panel-inner"><p>Pelo WhatsApp: a equipe explica documentação, valores e as condições completas para o seu caso.</p></div>
+        </div>
       </div>
       <div class="faq-item faq-item--wide">
-        <h3><span class="faq-q">P.</span> A aquisição da moto ao final é garantida?</h3>
-        <p>Não. É uma possibilidade prevista em contrato, condicionada ao cumprimento das condições contratuais durante os 28 meses. Não é uma garantia automática.</p>
+        <h3><button type="button" class="faq-trigger focus-ring" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5"><span class="faq-trigger-text"><span class="faq-q">P.</span> A aquisição da moto ao final é garantida?</span><svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+        <div id="faq-panel-5" class="faq-panel" role="region" aria-labelledby="faq-trigger-5">
+          <div class="faq-panel-inner"><p>Não. É uma possibilidade prevista em contrato, condicionada ao cumprimento das condições contratuais durante os 28 meses. Não é uma garantia automática.</p></div>
+        </div>
       </div>
     </div>
   </div>
@@ -509,7 +507,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Vixmotos.</p>
+    <p>© 2026 Vixmotos. Todos os direitos reservados.</p>
   </div>
 </footer>
 
@@ -589,6 +587,52 @@ window.addEventListener('resize', ()=>{
   }
 });
 
+// Avisa o botão flutuante do WhatsApp para recalcular colisão sempre que um card muda de
+// altura (etapa ou FAQ abrindo/fechando) — reaproveita o listener de 'resize' já existente.
+function notifyLayoutChange(){
+  window.dispatchEvent(new Event('resize'));
+  setTimeout(()=> window.dispatchEvent(new Event('resize')), 260);
+}
+
+// Etapas "Como funciona" — clicar numa etapa a destaca; nomes e explicações das 4 etapas
+// continuam sempre visíveis (a seleção só reforça visualmente, nunca esconde conteúdo).
+document.querySelectorAll('.step-select').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const allSteps = document.querySelectorAll('.step');
+    const allButtons = document.querySelectorAll('.step-select');
+    const thisStep = btn.closest('.step');
+    const alreadySelected = thisStep.classList.contains('is-selected');
+    allSteps.forEach(s=> s.classList.remove('is-selected'));
+    allButtons.forEach(b=> b.setAttribute('aria-pressed', 'false'));
+    if (!alreadySelected){
+      thisStep.classList.add('is-selected');
+      btn.setAttribute('aria-pressed', 'true');
+    }
+  });
+});
+
+// "Ver detalhes" / "Fechar detalhes" nas etapas — só nas etapas que têm informação extra confirmada
+document.querySelectorAll('.step-details-toggle').forEach(btn=>{
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  const label = btn.querySelector('.toggle-label');
+  btn.addEventListener('click', ()=>{
+    const isOpen = panel.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    label.textContent = isOpen ? 'Fechar detalhes' : 'Ver detalhes';
+    notifyLayoutChange();
+  });
+});
+
+// FAQ em acordeão — cada pergunta abre/fecha sua própria resposta (não exclusivo)
+document.querySelectorAll('.faq-trigger').forEach(btn=>{
+  const item = btn.closest('.faq-item');
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    notifyLayoutChange();
+  });
+});
+
 // Revelação ao rolar — sem JS ou com prefers-reduced-motion, o conteúdo permanece sempre visível
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!prefersReducedMotion && 'IntersectionObserver' in window){
@@ -639,7 +683,7 @@ if (navSectionLinks.length && 'IntersectionObserver' in window){
 // o gesto de rolar (um card pode ficar exatamente sob o botão quando a rolagem já parou).
 const fabWa = document.getElementById('fab-wa');
 if (fabWa){
-  const fabCollisionSelector = '.step, .faq-item, .instagram-item, #contato .cta-btn';
+  const fabCollisionSelector = '.step, .faq-item, .instagram-item, #contato .cta-btn, .footer-bottom';
   const updateFabVisibility = () => {
     const fabRect = fabWa.getBoundingClientRect();
     let collide = false;
