@@ -1,4 +1,6 @@
-# Vixmotos — site publicado. Sem bloqueio de indexacao.
-# Quando o dominio definitivo estiver confirmado, adicione aqui a referencia ao sitemap.xml.
+# Vixmotos — site institucional público. Indexação liberada.
+# Este arquivo só tem efeito na raiz do domínio: https://vixmotos.com.br/robots.txt
 User-agent: *
 Allow: /
+
+Sitemap: https://vixmotos.com.br/sitemap.xml
